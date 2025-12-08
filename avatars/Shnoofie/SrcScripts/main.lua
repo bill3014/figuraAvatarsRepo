@@ -1,15 +1,15 @@
---hide vanilla model
+--manage vanilla model
 vanilla_model.PLAYER:setVisible(false)
 
---hide vanilla armor model
+--manage vanilla armor model
 vanilla_model.ARMOR:setVisible(true)
 --re-enable the helmet item
 vanilla_model.HELMET_ITEM:setVisible(true)
 
---hide vanilla cape model
+--manage vanilla cape model
 vanilla_model.CAPE:setVisible(false)
 
---hide vanilla elytra model
+--manage vanilla elytra model
 vanilla_model.ELYTRA:setVisible(false)
 
 local physBone = require('physBoneAPI')
@@ -54,7 +54,14 @@ local currentState
 
 --tick event, called 20 times per second
 function events.tick()
-  if player:isCrouching() then
+
+  --[[ 
+  Fixes armor offset for certain modded armors
+        Currently Fixed
+          - Iron's Spells and Spellbooks
+  ]]--
+
+  if player:isCrouching() then  -- USE THE isCrouching() METHOD!! Any other method has a frame delay
     currentState = "Crouching"
     --if isPrefix(tostring(player:getItem(5)), "irons_spellbooks") then
     --log(player:getItem(6))

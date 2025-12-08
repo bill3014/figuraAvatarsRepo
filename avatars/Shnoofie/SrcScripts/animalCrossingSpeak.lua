@@ -1,5 +1,7 @@
 --[[ Chat sounds ]]
 
+local page = action_wheel:newPage()
+
 function pings:chatSound(pitch)
   sounds:playSound("minecraft:block.note_block.chime", player:getPos(), 1, pitch * 0.3 / 8 + 0.5)
 end
