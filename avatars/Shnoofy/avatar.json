@@ -2,7 +2,9 @@
   "name": "Shnoofie",
   "description": "A Schnoofer; ragebaiting Greg and Luke",
   "authors": [
-    ""
+    "bill - Modeling / Rigging",
+    "Dyrepi - Tail / Ears",
+    "Chloe Spaced Out - PhysicsAPI"
   ],
   "color": "#5ea5ff"
 }
