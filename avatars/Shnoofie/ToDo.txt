@@ -1,0 +1,4 @@
+- Emissive Runes Drawn on Character
+- Something w/ particles
+- Continue texturing / modeling
+- Blinking anims
