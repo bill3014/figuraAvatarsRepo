@@ -1,5 +1,18 @@
 --[[ Chat sounds ]]
 
+-- Disabled right now - May come back later --
+
+--[[ 
+    ****
+      This script won't work, do more research on animalease or korbospeak
+      -- Animalease is what I want, would have to be made custom, issues with pinging/parsing
+      -- KorboSpeak is already made, would not be hard at all to implement
+
+    ****
+--]] 
+        
+
+--[[
 local page = action_wheel:newPage()
 
 function pings:chatSound(pitch)
@@ -12,6 +25,8 @@ local function playChatSound()
 end
 
 page:newAction(5):title("Play chat sound"):item("minecraft:note_block"):onLeftClick(playChatSound)
+action_wheel:setPage(page)
+
 
 local chatSoundToggle = config:load("chatSound") or false
 local actionChatSoundToggle = page:newAction(4)
@@ -32,6 +47,8 @@ actionChatSoundToggle:onToggle(setChatSoundToggle)
 :setToggled(chatSoundToggle):setToggleColor(0, 0.25, 0)
 setChatSoundToggle(chatSoundToggle)
 
+
+-- The only function I would have to change, keep the rest to allow for the menu to work
 events.CHAT_SEND_MESSAGE:register(function(msg)
   if msg:find("^%s*/") then
     -- log("command!")
@@ -43,3 +60,4 @@ events.CHAT_SEND_MESSAGE:register(function(msg)
   end
   return msg
 end)
+]]--

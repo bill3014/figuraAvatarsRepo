@@ -12,16 +12,34 @@ vanilla_model.CAPE:setVisible(false)
 --manage vanilla elytra model
 vanilla_model.ELYTRA:setVisible(false)
 
-local physBone = require('physBoneAPI')
 
-local tailPhysics = require('tail')
-local earsPhysics = require('ears')
+-- Avatar Physics
+local physBone = require('Scripts/physBoneAPI')
+
+local tailPhysics = require('Scripts/tail')
+local earsPhysics = require('Scripts/ears')
 
 local tail = tailPhysics.new(models.model.root.Body.Tail)
 local ears = earsPhysics.new(models.model.root.Head.LeftEar, models.model.root.Head.RightEar)
 
+-- pings
+function pings.actionClicked()
+  log("Hello")
+end
+--
+
+-- Action wheel
+local mainPage = action_wheel:newPage()
+action_wheel:setPage(mainPage)
+local action = mainPage:newAction()
+    :title("Test")
+    :item("minecraft:acacia_door")
+    :hoverColor(0, 1, 1)
+    :onLeftClick(pings.actionClicked)
+
+
 ears:setConfig {
-  -- you can check ears.lua to see default config
+  -- just changed it directly in the file
 }
 
 keybinds:newKeybind("tail - wag", "key.keyboard.v")
@@ -34,7 +52,8 @@ end
 
 --entity init event, used for when the avatar entity is loaded for the first time
 function events.entity_init()
-
+  physBone.physBoneLeftFluff:setAirResistance(1)
+  physBone.physBoneRightFluff:setAirResistance(1)
 end
 
 
@@ -43,10 +62,7 @@ end
 --"delta" is the percentage between the last and the next tick (as a decimal value, 0.0 to 1.0)
 --"context" is a string that tells from where this render event was called (the paperdoll, gui, player render, first person)
 function events.render(delta, context)
-    
-  physBone.physBoneLeftFluff:setAirResistance(0.1)
-  physBone.physBoneRightFluff:setAirResistance(0.1)
-
+ -- code here
 end
 
 
@@ -61,7 +77,7 @@ function events.tick()
           - Iron's Spells and Spellbooks
   ]]--
 
-  if player:isCrouching() then  -- USE THE isCrouching() METHOD!! Any other method has a frame delay
+  if player:isCrouching() and not player:isGliding() then  -- USE THE isCrouching() METHOD!! Any other method has a frame delay
     currentState = "Crouching"
     --if isPrefix(tostring(player:getItem(5)), "irons_spellbooks") then
     --log(player:getItem(6))
@@ -114,7 +130,6 @@ function events.tick()
 
   end
 end
-
 
 function isIrons(itemID)
   return string.find(player:getItem(itemID).id, "irons_spellbooks") ~= nil

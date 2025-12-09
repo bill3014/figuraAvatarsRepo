@@ -40,7 +40,7 @@ function earsPhysics.new(leftEar, rightEar)
       addAngle = {}, -- adds angle to ear rotation
 
       earsFlick = true, -- set if ears should flick
-      flickChance = 400, -- chance of ear flick per tick
+      flickChance = 400, -- chance of ear flick per tick (1/n)
       flickDelay = 40, -- minimum delay between ear flicks
       flickStrength = 30, -- how much ears should flick
 
@@ -99,7 +99,7 @@ local function tickEars(obj, playerVel, playerRotVel, isCrouching, playerRot)
    obj.oldRot = obj.rot
    -- set target rotation
    local targetRotZW = 0
-   if isCrouching then
+   if isCrouching and extraAngle ~= 0 then
       targetRotZW = obj.config.extraAngle
    else
       for _, v in pairs(obj.config.useExtraAngle) do

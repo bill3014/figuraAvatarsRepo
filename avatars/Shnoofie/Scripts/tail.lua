@@ -38,7 +38,7 @@ function tailPhysics.new(model)
       stiff = 0.10, -- how stiff should tail be
       ---@type number|Vector4
       waterStiff = 0.5, -- how stiff should tail be underwater
-      waterStrength = 0.5, -- how much water will affect tail
+      waterStrength = 0.8, -- how much water will affect tail
 
       extraMovingStiff = 0.15, -- extra stiff when moving
       movingStiffStrength = 20,
@@ -186,7 +186,7 @@ local function tickTail(obj, playerVelRaw, bodyVel, waterStrength, baseWagWalkSp
    local playerVel = playerVelRaw * obj.config.velocityStrength
    -- water level
    local tailPos = player:getPos():add(0, obj.tailY, 0)
-   local waterLevel = getUnderwaterlevel(tailPos)
+   local waterLevel = getUnderwaterlevel(tailPos)            --v-- Max height that the tail may go (anything over 2 looks weird)
    local inWater = math.clamp(waterLevel + 0.5, 0, 1) * obj.config.waterStrength * waterStrength
    -- apply velocity
    local acc = vec(
