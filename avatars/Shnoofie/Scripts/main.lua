@@ -12,6 +12,9 @@ vanilla_model.CAPE:setVisible(false)
 --manage vanilla elytra model
 vanilla_model.ELYTRA:setVisible(false)
 
+-- Sets emmisives to the EYES render type (disables them under invisibility)
+models:setSecondaryRenderType("EYES")
+
 
 -- Avatar Physics
 local physBone = require('Scripts/physBoneAPI')
